@@ -232,7 +232,7 @@ def entrarValores(event):
     global todosValores
     if event == "apagar":
 
-        todosValores = todosValores.rstrip(todosValores[-1])
+        todosValores = todosValores[:-1]
         valorVariavel.set(todosValores)
     else:
         todosValores += str(event)
