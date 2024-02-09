@@ -5,73 +5,189 @@
 import tkinter as tk
 from tkinter import *
 
+from operator import *
+import operator as op
+from tkinter import ttk
+
 import pyautogui_exemplo as atu
 
 count = 0
 
 
+# cores
+cor1 = "#feffff"  # white/branca
+cor2 = "#38576b"
+cor3 = "#ECEFF1"
+cor4 = "#FFAB40"  # Orange/laranja
+
+
+# Dicionário de operadores
+
+dic_op = {
+    "+": op.add,
+    "-": op.sub,
+    "/": op.truediv,
+    "*": op.mul,
+}
+
+
+# função do Botão
+
+
 def botao(nm, frm_):
     if nm == foto:
-
-        tk.Button(frm_, image=nm, height=45, width=45).pack(side="right", padx=10)
-        return nm
+        # Divisão
+        tk.Button(
+            frm_,
+            image=nm,
+            command=lambda: entrarValores("/"),
+            height=45,
+            width=55,
+            bg=cor4,
+        ).pack(side="right")
     elif nm == foto2:
-        tk.Button(frm_, image=nm, height=45, width=45).pack(side="left", padx=10)
+        # Mais ou Menos
+        tk.Button(
+            frm_,
+            image=nm,
+            command=lambda: entrarValores(""),
+            height=45,
+            width=55,
+            bg=cor4,
+        ).pack(side="left")
     elif nm == foto3:
-        tk.Button(frm_, image=nm, height=45, width=45).pack(side="left", padx=10)
+        # Apagar
+        tk.Button(
+            frm_,
+            image=nm,
+            height=45,
+            command=lambda: entrarValores("apagar"),
+            width=55,
+            bg=cor4,
+        ).pack(side="left")
     elif nm == foto4:
-        tk.Button(frm_, image=nm, height=45, width=45).pack(side="left", padx=10)
+        # Subtração
+        tk.Button(
+            frm_,
+            image=nm,
+            height=45,
+            command=lambda: entrarValores("-"),
+            width=55,
+            bg=cor4,
+        ).pack(side="left")
     elif nm == foto5:
-        tk.Button(frm_, image=nm, height=45, width=45).pack(side="left", padx=10)
+        # Multiplicação
+        tk.Button(
+            frm_,
+            image=nm,
+            height=45,
+            command=lambda: entrarValores("*"),
+            width=55,
+            bg=cor4,
+        ).pack(side="left")
     elif nm == foto6:
-        tk.Button(frm_, image=nm, height=45, width=45).pack(side="left", padx=10)
+        # Adição
+        tk.Button(
+            frm_,
+            image=nm,
+            height=45,
+            command=lambda: entrarValores("+"),
+            width=55,
+            bg=cor4,
+        ).pack(side="left", padx=4)
+    # elif nm == ",":
+    # Virgula
+    #    tk.Button(
+    #        frm_,text=str(nm),height=2,width=5,font="Ivy 13 bold",relief=RAISED,overrelief=RIDGE,bg=cor4).pack(side="left", padx=5)
     else:
-        btn = tk.Button(frm_, text=str(nm), width=5, height=3).pack(
-            side="left", padx=10)
+        # Botões
+        btn = tk.Button(
+            frm_,
+            text=str(nm),
+            command=lambda: entrarValores(nm),
+            height=2,
+            width=5,
+            font="Ivy 13 bold",
+            relief=RAISED,
+            overrelief=RIDGE,
+        ).pack(side="left", padx=5)
+
 
 # janela Tk
 janelaTk = tk.Tk()
-janelaTk.geometry("280x450")
+janelaTk.geometry("280x370")
 janelaTk.title("Caluladora revolucionária")
+janelaTk.configure(background=cor2)
 
-texto = tk.StringVar()
+
+#
+ttk.Separator(janelaTk, orient=HORIZONTAL).grid(row=1, column=1, ipadx=135, pady=3)
+ttk.Separator(janelaTk, orient=HORIZONTAL).grid(row=6, column=1, ipadx=135, pady=5)
+
+
+#
+
+
 # Frame
 
-frm = Frame(janelaTk, width=350, height=100, bg="blue", cursor="dot")
-frm.grid(column=1, row=0, pady=10, padx=75)
+tela = Frame(janelaTk, width=280, height=70, bg=cor2, cursor="dot")
+tela.grid(column=1, row=0, pady=10)
 
+frm_tecl = Frame(janelaTk, width=280, background=cor2).grid(column=1, row=2)
 
-frm2 = Frame(janelaTk, width=450, height=70, bg="blue")
-frm2.grid(column=1, row=6, pady=5)
+frm2 = Frame(janelaTk, width=280, height=70, background=cor2)
+frm2.grid(
+    column=1,
+    row=7,
+    # pady=5,
+)
 
-ferramentas = Frame(janelaTk, width=350, height=100)
-ferramentas.grid(column=1, row=1, pady=10, padx=75)
+# ferramentas = Frame(frm_tecl, width=280, height=100)
+# ferramentas.grid(column=1, row=1, pady=10, padx=75)
 
-teclasl1 = Frame(janelaTk, width=450, height=70)
-teclasl1.grid(column=1, row=2, pady=5)
+teclasl1 = Frame(frm_tecl, background=cor2)
+teclasl1.grid(column=1, row=2)
 
-teclasl2 = Frame(janelaTk, width=450, height=70)
-teclasl2.grid(column=1, row=3, pady=5)
+teclasl2 = Frame(frm_tecl, background=cor2)
+teclasl2.grid(column=1, row=3)
 
-teclasl3 = Frame(janelaTk, width=450, height=70)
-teclasl3.grid(column=1, row=4, pady=5)
+teclasl3 = Frame(frm_tecl, background=cor2)
+teclasl3.grid(column=1, row=4)
 
-teclasl4 = Frame(janelaTk, width=450, height=70)
-teclasl4.grid(column=1, row=5, pady=5)
+teclasl4 = Frame(frm_tecl, background=cor2)
+teclasl4.grid(column=1, row=5)
 
 tptcl = (teclasl1, teclasl2, teclasl3, teclasl4)
-# label
 
-label = tk.Label(janelaTk)
-label.grid(column=4, row=2)
+
+# texto label
+valorVariavel = StringVar()
+
+
+# label
+app_tela = Label(
+    tela,
+    textvariable=valorVariavel,
+    width=19,
+    height=3,
+    padx=7,
+    relief="flat",
+    anchor="e",
+    bd=0,
+    justify=RIGHT,
+    font=("Ivy 18 "),
+    bg="#37474F",
+    fg=cor1,
+)
+app_tela.place(x=0, y=0)
 
 # lista de botões
-foto = PhotoImage(file="Prova\images\divisao.png") 
-foto2 = PhotoImage(file="Prova\images\maisoumenos.png")
-foto3 = PhotoImage(file=r"Prova\images\backspace.png")
-foto4 = PhotoImage(file=r"Prova\images\sub.png")
-foto5 = PhotoImage(file=r"Prova\images\multipl.png")
-foto6 = PhotoImage(file=r"Prova\images\add.png")
+foto = PhotoImage(file="images\divisao.png")
+foto2 = PhotoImage(file="images\maisoumenos.png")
+foto3 = PhotoImage(file=r"images\backspace.png")
+foto4 = PhotoImage(file=r"images\sub.png")
+foto5 = PhotoImage(file=r"images\multipl.png")
+foto6 = PhotoImage(file=r"images\add.png")
 
 
 foto = foto.subsample(15, 15)
@@ -83,28 +199,45 @@ foto6 = foto6.subsample(15, 15)
 
 #   Caixa de texto
 
-caixa_texto = tk.Entry(frm)
+# caixa_texto = tk.Entry(tela)
 
-caixa_texto.configure(textvariable=texto)
-caixa_texto.pack(pady=20)
+# caixa_texto.configure(textvariable=texto)
+# caixa_texto.pack(pady=20)
 # Lista de Botões
 
 for i in range(0, 3):
     for n in range(1, 4):
         count += 1
         botao(count, tptcl[i])
-        
+
 # Botões
 botao(foto, teclasl4)
-botao(foto2, teclasl4)
-botao(foto3, ferramentas)
+# botao(foto2, teclasl4)
+botao(foto3, teclasl1)
 
 botao(foto4, teclasl2)
 botao(foto5, teclasl3)
-botao(foto6, teclasl1)
+botao(foto6, teclasl4)
 
 botao("0", teclasl4)
 botao(",", teclasl4)
-tk.Button(frm2, text="Automatizar",command=atu.automacao).pack()
+tk.Button(frm2, text="Automatizar", command=atu.automacao).pack()
+
+
+# Memória Calculadora
+todosValores = ""
+
+
+def entrarValores(event):
+    global todosValores
+    if event == "apagar":
+
+        todosValores = todosValores.rstrip(todosValores[-1])
+        valorVariavel.set(todosValores)
+    else:
+        todosValores += str(event)
+        # resultado = eval(todosValores)
+        valorVariavel.set(todosValores)
+
 
 janelaTk.mainloop()
