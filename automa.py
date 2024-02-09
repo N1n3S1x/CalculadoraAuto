@@ -4,26 +4,40 @@ from pyautogui import *
 import time as t
 import os
 
+diretorio_atual = os.listdir(r'images\calcwin')
+dic_posicoes = {}
+indice = []
+posicao = []
 
-lista_posicoes = []
+
+def automacao():
+    t.sleep(1)
+    pyautogui.hotkey('win','r')
+    t.sleep(2)
+    pyautogui.write('calc',0.1)
+    t.sleep(1)
+    pyautogui.press('enter')
+    
+    
+def mouse(x,y):
+    #pyautogui.click(x,y,clicks=1,interval=0.8,button='left')
+    pyautogui.moveTo(x,y,0.3)
+    pyautogui.click()
 
 
 def localizar():
-    diretorio_atual = os.listdir(r'C:\python\Prova\CalculadoraAuto\images\calcwin')
+    global dic_posicoes
+    t.sleep(3)
     for i in diretorio_atual:
-        t.sleep(2)
-   # None
-   # t.sleep(4)
-        posicoes = list(pyautogui.locateCenterOnScreen(f'C:\python\Prova\CalculadoraAuto\images\calcwin\{i}'))
-        global lista_posicoes
-        lista_posicoes.append(posicoes)
-        
-        print(posicoes)
-   # #pyautogui.click(posicoes)
-   # print(posicoes)
-    
+        posicoes = list(pyautogui.locateCenterOnScreen(f'images\calcwin\{i}'))
+        dic_posicoes[i] = posicoes 
 
-print(lista_posicoes)
-t.sleep(4)
+
+
+#automacao()
 localizar()
-print(lista_posicoes)
+
+posicao = (dic_posicoes.get('2.png'))
+
+
+print(x,y)
