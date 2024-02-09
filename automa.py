@@ -40,4 +40,3 @@ localizar()
 posicao = (dic_posicoes.get('2.png'))
 
 
-print(x,y)
