@@ -51,9 +51,18 @@ class Automa():
     def receberComando(comando):
            
         for coman in comando:
+            #print(coman)
             for nome in listaDiretorio_atual:
                 if coman == str(nome[:-4]):
-                    print("ola")
+                   numeros = coman
+                   None
+            if coman in dic_op:
+                operacao = dic_op.get(coman)
+                
+            else:
+                None
+            
+                
                 
             
  
