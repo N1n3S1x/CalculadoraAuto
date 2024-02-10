@@ -9,7 +9,7 @@ from operator import *
 import operator as op
 from tkinter import ttk
 
-import pyautogui_exemplo as atu
+from automa import *
 
 count = 0
 
@@ -23,12 +23,7 @@ cor4 = "#FFAB40"  # Orange/laranja
 
 # Dicionário de operadores
 
-dic_op = {
-    "+": op.add,
-    "-": op.sub,
-    "/": op.truediv,
-    "*": op.mul,
-}
+
 
 
 # função do Botão
@@ -221,23 +216,38 @@ botao(foto6, teclasl4)
 
 botao("0", teclasl4)
 botao(",", teclasl4)
-tk.Button(frm2, text="Automatizar", command=atu.automacao).pack()
+tk.Button(frm2, text="Automatizar", command=Automa).pack()
 
 
 # Memória Calculadora
 todosValores = ""
+listaValores = []
 
 
 def entrarValores(event):
     global todosValores
+    global listaValores
     if event == "apagar":
 
+        valor_procurado = str(todosValores[-1])
+        indice = listaValores.index(valor_procurado)
+        listaValores.remove(listaValores[indice])
+
         todosValores = todosValores[:-1]
+
         valorVariavel.set(todosValores)
+        #print(listaValores)
+
     else:
         todosValores += str(event)
-        # resultado = eval(todosValores)
-        valorVariavel.set(todosValores)
 
+        listaValores.append(str(event))
+       
+        valorVariavel.set(todosValores)
+        #print(listaValores)
+        return Automa.receberComando(str(event))
+
+
+    #automa.Automa.receberComando(listaValores[coman])
 
 janelaTk.mainloop()
