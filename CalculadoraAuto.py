@@ -216,7 +216,7 @@ botao(foto6, teclasl4)
 
 botao("0", teclasl4)
 botao(",", teclasl4)
-tk.Button(frm2, text="Automatizar", command=Automa).pack()
+tk.Button(frm2, text="Automatizar", command=Automa.automacao).pack()
 
 
 # Memória Calculadora
@@ -237,6 +237,7 @@ def entrarValores(event):
 
         valorVariavel.set(todosValores)
         #print(listaValores)
+        return Automa.receberComando(str(event))
 
     else:
         todosValores += str(event)
@@ -244,7 +245,8 @@ def entrarValores(event):
         listaValores.append(str(event))
        
         valorVariavel.set(todosValores)
-        #print(listaValores)
+        
+        # enviando os valores para a Automação
         return Automa.receberComando(str(event))
 
 
