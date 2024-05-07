@@ -1,0 +1,271 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "toc_visible": true,
+      "mount_file_id": "1UVEWjvgstdKVR7I42JDXCNVv3PonwvSx",
+      "authorship_tag": "ABX9TyNlmaqt2GaomMZteV6HETCn",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/N1n3S1x/CalculadoraAuto/blob/main/Leitor%20de%20excel\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "BnILRAbOlYDa"
+      },
+      "outputs": [],
+      "source": [
+        "import openpyxl\n",
+        "\n",
+        "#arquivo = openpyxl.load_workbook (f'/Formulário sus (respostas).xlsx')\n",
+        "#ws = arquivo.active\n",
+        "\n",
+        "# Substitua 'arquivo.xlsx' pelo nome do seu arquivo\n",
+        "#workbook = openpyxl.load_workbook(f'/Formulário sus (respostas).xlsx')\n",
+        "workbook = openpyxl.load_workbook(f'/Formulário de Garcez.xlsx')\n",
+        "\n",
+        "# Acesse a planilha ativa (primeira planilha por padrão)\n",
+        "worksheet = workbook.active\n",
+        "\n",
+        "# Ou acesse uma planilha específica pelo nome\n",
+        "#worksheet = workbook['NomeDaPlanilha1']\n",
+        "\n"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# Acesse a célula A1\n",
+        "valor_A1 = worksheet['A1'].value\n",
+        "\n",
+        "# Acesse a célula C5\n",
+        "valor_C5 = worksheet['C1'].value\n",
+        "print(valor_A1,valor_C5)"
+      ],
+      "metadata": {
+        "id": "0ddrirPBreG8"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# Acesse um intervalo de células (de A1 a C5)\n",
+        "intervalo = worksheet['A1:C5']\n",
+        "\n",
+        "# Para cada célula no intervalo, acesse o valor\n",
+        "worksheet['C5'].value\n",
+        "print(worksheet)\n"
+      ],
+      "metadata": {
+        "id": "5f057cgLr0RU"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "dicionario_Usu = {}\n",
+        "acumul = 0\n",
+        "for usuario in range (2,19):\n",
+        "  acumul += 1\n",
+        "  #print(f\"usuario N{acumul}\")\n",
+        "  for row in worksheet.iter_rows(min_row = usuario, max_row= usuario, min_col=2, max_col=11, values_only= True):\n",
+        "\n",
+        "    #armazenado em um Dicionario\n",
+        "    dicionario_Usu[f'usuario{acumul}']= row\n",
+        "\n",
+        "\n",
+        "for usuario, valores in dicionario_Usu.items():\n",
+        "     print(f\"{usuario}: valores{valores}\")\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "cZuDClNko17l",
+        "outputId": "8e03c469-7852-4f95-f5e7-4b4594d5c39b"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "usuario1: valores('Concordo', 'Concordo', 'Neutro', 'Discordo', 'Concordo', 'Neutro', 'Concordo', 'Discordo', 'Concordo', 'Discordo')\n",
+            "usuario2: valores('Neutro', 'Concordo Totalmente', 'Discordo Totalmente', 'Discordo', 'Concordo', 'Neutro', 'Concordo Totalmente', 'Discordo Totalmente', 'Concordo', 'Discordo Totalmente')\n",
+            "usuario3: valores('Concordo', 'Concordo Totalmente', 'Discordo', 'Discordo Totalmente', 'Concordo', 'Discordo Totalmente', 'Concordo Totalmente', 'Discordo', 'Concordo Totalmente', 'Discordo Totalmente')\n",
+            "usuario4: valores('Concordo Totalmente', 'Concordo Totalmente', 'Discordo', 'Discordo', 'Concordo Totalmente', 'Discordo', 'Concordo', 'Discordo', 'Concordo', 'Discordo')\n",
+            "usuario5: valores('Concordo Totalmente', 'Concordo Totalmente', 'Discordo', 'Concordo Totalmente', 'Concordo Totalmente', 'Discordo', 'Concordo Totalmente', 'Discordo', 'Concordo Totalmente', 'Discordo Totalmente')\n",
+            "usuario6: valores('Concordo Totalmente', 'Concordo Totalmente', 'Discordo Totalmente', 'Discordo Totalmente', 'Concordo', 'Discordo Totalmente', 'Concordo Totalmente', 'Discordo', 'Concordo Totalmente', 'Discordo Totalmente')\n",
+            "usuario7: valores('Concordo Totalmente', 'Concordo Totalmente', 'Discordo Totalmente', 'Discordo Totalmente', 'Concordo Totalmente', 'Discordo Totalmente', 'Concordo Totalmente', 'Discordo', 'Concordo Totalmente', 'Discordo Totalmente')\n",
+            "usuario8: valores('Concordo', 'Concordo', 'Neutro', 'Discordo', 'Concordo', 'Discordo', 'Concordo', 'Discordo', 'Concordo', 'Discordo')\n",
+            "usuario9: valores('Concordo Totalmente', 'Concordo Totalmente', 'Discordo Totalmente', 'Discordo Totalmente', 'Concordo Totalmente', 'Discordo Totalmente', 'Concordo Totalmente', 'Discordo Totalmente', 'Concordo Totalmente', 'Discordo Totalmente')\n",
+            "usuario10: valores('Concordo Totalmente', 'Concordo Totalmente', 'Discordo Totalmente', 'Discordo Totalmente', 'Concordo Totalmente', 'Discordo', 'Concordo', 'Discordo Totalmente', 'Concordo', 'Discordo Totalmente')\n",
+            "usuario11: valores('Concordo Totalmente', 'Concordo Totalmente', 'Neutro', 'Discordo', 'Concordo Totalmente', 'Discordo', 'Concordo', 'Discordo', 'Concordo', 'Concordo')\n",
+            "usuario12: valores('Discordo Totalmente', 'Discordo Totalmente', 'Concordo Totalmente', 'Concordo Totalmente', 'Discordo Totalmente', 'Concordo Totalmente', 'Discordo Totalmente', 'Concordo Totalmente', 'Discordo Totalmente', 'Concordo Totalmente')\n",
+            "usuario13: valores('Concordo', 'Neutro', 'Neutro', 'Neutro', 'Neutro', 'Discordo', 'Concordo', 'Neutro', 'Neutro', 'Discordo Totalmente')\n",
+            "usuario14: valores('Neutro', 'Concordo Totalmente', 'Discordo Totalmente', 'Discordo Totalmente', 'Concordo', 'Discordo', 'Concordo Totalmente', 'Discordo Totalmente', 'Concordo Totalmente', 'Discordo Totalmente')\n",
+            "usuario15: valores('Neutro', 'Concordo Totalmente', 'Discordo', 'Discordo Totalmente', 'Concordo Totalmente', 'Discordo', 'Concordo Totalmente', 'Discordo', 'Neutro', 'Discordo Totalmente')\n",
+            "usuario16: valores('Concordo', 'Concordo', 'Discordo', 'Discordo', 'Concordo', 'Discordo Totalmente', 'Concordo Totalmente', 'Discordo Totalmente', 'Concordo', 'Discordo Totalmente')\n",
+            "usuario17: valores('Concordo', 'Concordo Totalmente', 'Discordo Totalmente', 'Discordo', 'Concordo', 'Discordo Totalmente', 'Concordo Totalmente', 'Discordo', 'Concordo', 'Discordo Totalmente')\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "def Calcular(usuario):\n",
+        "  dic_Usu = {}\n",
+        "  dic_Usu2 = {}\n",
+        "  dic_questoes = {}\n",
+        "  armazenarValor = []\n",
+        "  somaPares = 0\n",
+        "  somaImpares = 0\n",
+        "  quest = 0\n",
+        "\n",
+        "  dic_resposta = {\n",
+        "      'Concordo Totalmente' : 5,\n",
+        "      'Concordo':4,\n",
+        "      'Neutro': 3,\n",
+        "      'Discordo':2,\n",
+        "      'Discordo Totalmente':1\n",
+        "  }\n",
+        "  valor = usuario\n",
+        "  #print(valor)\n",
+        "  keys2 = list(dic_resposta.keys())\n",
+        "\n",
+        "  for indiceValor in range(0,10):\n",
+        "    quest = indiceValor\n",
+        "    for key in keys2:\n",
+        "      if  valor[indiceValor] == key:\n",
+        "\n",
+        "        dic_questoes[f'{quest+1}'] = dic_resposta[f'{valor[indiceValor]}']\n",
+        "\n",
+        "  keys = list(dic_questoes.keys())\n",
+        "\n",
+        "  for key in keys:\n",
+        "    if int(key) % 2 == 0:\n",
+        "\n",
+        "      calculo = 5 - int(dic_questoes[f'{key}'])\n",
+        "\n",
+        "      somaPares += calculo\n",
+        "\n",
+        "\n",
+        "    else:\n",
+        "      calculo = int(dic_questoes[f'{key}']) - 1\n",
+        "\n",
+        "      #print(\"dic quest impares\",dic_questoes[f'{key}'])\n",
+        "      somaImpares += calculo\n",
+        "  total = (somaPares + somaImpares)*2.5\n",
+        "\n",
+        "\n",
+        "  #print(f\"Procentagem de satisfação do Usuario = {total}%\")\n",
+        "  #print(keys)\n",
+        "  return total\n",
+        "  #print(dic_questoes)\n",
+        "  #print(valor)\n",
+        "#Calcular('usuario1')"
+      ],
+      "metadata": {
+        "id": "f8aMxFmSERlt"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#print(dicionario_Usu)\n",
+        "mediaSus = 0\n",
+        "lsitadecadausu = []\n",
+        "dic_resul = {}\n",
+        "for numUsu in range(1,18):\n",
+        "  usuario = dicionario_Usu[f'usuario{numUsu}']\n",
+        "\n",
+        "\n",
+        "  dic_resul[f'usuario{numUsu}'] = Calcular(usuario)\n",
+        "\n",
+        "\n",
+        "  lsitadecadausu.append(Calcular(usuario))\n",
+        "\n",
+        "\n",
+        "\n",
+        "for chave in dic_resul:\n",
+        "  calc = dic_resul[f\"{chave}\"]\n",
+        "  mediaSus += calc\n",
+        "mediaSus = mediaSus/17\n",
+        "\n",
+        "print(f'Avaliação geral de satisfação do Site {mediaSus:0.02f}%')\n",
+        "print(lsitadecadausu)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "QsQe5BwFvVsB",
+        "outputId": "42d18afe-d355-4aeb-f8df-a97b45bc2f42"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Avaliação geral de satisfação do Site 66.91%\n",
+            "[65.0, 62.5, 75.0, 67.5, 67.5, 75.0, 77.5, 67.5, 80.0, 72.5, 65.0, 20.0, 62.5, 70.0, 67.5, 75.0, 67.5]\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "\n",
+        "#worksheet.title = 'planilha2jc'\n",
+        "#for chave in dic_resul:\n",
+        " # for x in range(3,12):\n",
+        "  #  for y in range(19,20):\n",
+        "   #   worksheet.cell(row=x,col=y,value=dic_resul[f'{chave}'])\n"
+      ],
+      "metadata": {
+        "id": "zCss-WkDTPul"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [],
+      "metadata": {
+        "id": "duzlnVpptWis"
+      },
+      "execution_count": null,
+      "outputs": []
+    }
+  ]
+}
